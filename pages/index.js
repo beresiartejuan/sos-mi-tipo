@@ -2,8 +2,10 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
+import { withIronSessionSsr } from "iron-session/next";
+import { sessionOptions } from '../libs/session';
 
-export default function Home() {
+export default function Home({ email }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -13,18 +15,29 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h3 className={styles.title}>
-          ¡Crea tu cuenta!
-        </h3>
-        <form className={styles.form}>
-          <input placeholder='Email' className={styles.input}></input>
-          <input placeholder='Password' className={styles.input}></input>
-          <input placeholder='Country' className={styles.input}></input>
-          <input placeholder='City' className={styles.input}></input>
-          <Link href="/"><a className={styles.form_link}>¿Ya tienes una cuenta?</a></Link>
-          <input type="submit" className={styles.input} value="Login" onClick={() => alert("HOLA")}></input>
-        </form>
+        <h3>Index</h3>
+        <Link href="/login"><a>Ingresar</a></Link>
+        <Link href="/singup"><a>Registrarse</a></Link>
+        <p>{email}</p>
       </main>
     </div>
   )
 }
+
+export const getServerSideProps = withIronSessionSsr(async function getServerSideProps({ req }){
+  const user = req.session.user
+  if(!user){
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    }
+  }
+
+  return {
+    props:{
+      email: user.email
+    }
+  }
+}, sessionOptions)
