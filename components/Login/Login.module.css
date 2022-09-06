@@ -1,0 +1,16 @@
+.Login {
+    max-width: 510px;
+}
+
+.Login h3 {
+    margin: 0;
+    line-height: 1;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.Login a {
+    margin-top: 20px;
+    display: inline-block;
+}

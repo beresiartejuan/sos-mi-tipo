@@ -4,8 +4,16 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from '../libs/session';
+import useUser from '../libs/useUser';
 
-export default function Home({ email }) {
+export default function Home() {
+
+  const { user } = useUser({
+    redirectTo: '/login'
+  })
+
+  if(!user || !user?.isLoggedIn) return (<div></div>)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -18,12 +26,11 @@ export default function Home({ email }) {
         <h3>Index</h3>
         <Link href="/login"><a>Ingresar</a></Link>
         <Link href="/singup"><a>Registrarse</a></Link>
-        <p>{email}</p>
       </main>
     </div>
   )
 }
-
+/*
 export const getServerSideProps = withIronSessionSsr(async function getServerSideProps({ req }){
   const user = req.session.user
   if(!user){
@@ -37,7 +44,6 @@ export const getServerSideProps = withIronSessionSsr(async function getServerSid
 
   return {
     props:{
-      email: user.email
     }
   }
-}, sessionOptions)
+}, sessionOptions)*/
