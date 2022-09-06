@@ -6,11 +6,6 @@ import { withIronSessionSsr } from "iron-session/next";
 import { sessionOptions } from '../libs/session';
 import Login from '../components/Login/Login';
 
-
-function loggin(e){
-    console.log(e)
-}
-
 export default function Home() {
     return (
         <div className={styles.container}>
