@@ -4,7 +4,7 @@ import styles from './Login.module.css';
 
 export default function Login(){
     return (
-        <form className={styles.Login} action="/api/entrar" method='POST'>
+        <form className={styles.Login} action="/api/login" method='POST'>
             <h3>
                 ¡Inicia Sesión!
             </h3>

@@ -4,10 +4,11 @@ import styles from './Singup.module.css';
 
 export default function Singup(){
     return (
-        <form className={styles.Singup} action="/api/entrar" method='POST'>
+        <form className={styles.Singup} action="/api/singup" method='POST'>
             <h3>
                 ¡Crea tu cuenta!
             </h3>
+            <MyInput text='Name' type='text' name='name' complete="name"></MyInput>
             <MyInput text='Email' type='email' name='email'></MyInput>
             <MyInput text='Password' type='password' name='password'></MyInput>
             <MyInput text='Country' type='text' name='country' complete="country-name"></MyInput>

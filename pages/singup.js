@@ -1,12 +1,19 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
 import Singup from '../components/Singup/Singup';
-import { withIronSessionSsr } from "iron-session/next";
-import { sessionOptions } from '../libs/session';
+import { withSessionSsr } from '../libs/withSession';
+import { useEffect } from 'react';
 
-export default function Home() {
+export default function Home({ errors }) {
+
+    useEffect(() => {
+        if(!errors) return
+        errors.forEach(error => {
+            const element = document.getElementById(error.field)
+            element.style.backgroundColor = "#f16352d4"
+        })
+    }, [errors])
+
     return (
         <div className={styles.container}>
             <Head>
@@ -21,8 +28,10 @@ export default function Home() {
     )
 }
 
-export const getServerSideProps = withIronSessionSsr(async function getServerSideProps({ req }) {
+export const getServerSideProps = withSessionSsr(async function getServerSideProps({ req }) {
     const user = req.session.user
+    const errors = req.session.errors
+
     if (user) {
         return {
             redirect: {
@@ -34,6 +43,7 @@ export const getServerSideProps = withIronSessionSsr(async function getServerSid
 
     return {
         props: {
+            errors: errors ? JSON.parse(errors) : null
         }
     }
-}, sessionOptions)
+})

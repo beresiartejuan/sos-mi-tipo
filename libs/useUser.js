@@ -1,27 +1,29 @@
-import { useEffect } from 'react'
-import Router from 'next/router'
-import useSWR from 'swr'
+import Router from "next/router"
+import { useEffect } from "react"
+import useSWR from "swr"
 
-const fetcher = (...args) => fetch(...args).then(res => res.json())
+const fetcher = (url) => fetch(url).then(res => res.json())
 
-export default function useUser({
-    redirectTo = false,
-    redirectIfFound = false,
-} = {}) {
-    const { data: user, mutate: mutateUser } = useSWR('/api/user', fetcher)
+export default function useUser(redirectTo=false, redirectIfFound=false){
+
+    const { data: user, mutate: mutateUser, error } = useSWR('/api/u/me', fetcher)
 
     useEffect(() => {
 
-        if(!user || !user.isLoggedIn){
+        if(user?.isLoggedIn && redirectIfFound){
             if(redirectTo) Router.push(redirectTo)
             return
         }
-        if(user && user?.isLoggedIn){
-            if(redirectIfFound) Router.push(redirectIfFound)
+
+        if(!redirectIfFound && !user?.isLoggedIn){
+            if(redirectTo) Router.push(redirectTo)
             return
         }
 
-    }, [user, redirectIfFound, redirectTo])
+        return
 
-    return { user, mutateUser }
+    }, [user, redirectTo, redirectIfFound, Router])
+
+    return { user, mutateUser, error }
+
 }
