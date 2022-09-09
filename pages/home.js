@@ -1,6 +1,9 @@
 import Link from "next/link";
+import Error from "next/error";
 import Loader from '../components/Loader/Loader';
-import useUser from '../libs/useUser'
+import Main from '../atoms/Main/Main';
+import Post from '../components/Post/Post';
+import useUser from '../libs/useUser';
 import { withSessionSsr } from '../libs/withSession';
 
 export default function Home(){
@@ -8,7 +11,7 @@ export default function Home(){
     const { user, error } = useUser('/login')
 
     if(error){
-        return <h2>Error {error}</h2>
+        return <Error>error</Error>
     }
 
     if(!user){
@@ -17,8 +20,11 @@ export default function Home(){
 
     return (
         <div>
-            <p>{user.email}</p>
-            <Link href='/u/logout'><a>Logout</a></Link>
+            <Main>
+                <div>
+                    <Post></Post>
+                </div>
+            </Main>
         </div>
     )
 }

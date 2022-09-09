@@ -4,17 +4,15 @@ const postSchema = new Schema({
     type: { type: String, required: true },
     content: { type: String },
     hospital: { type: String },
-    owner: { type: String }
+    owner: { type: String, required: true },
+    city: { type: String },
+    country: { type: String }
 }, {
     timestamps: true,
     versionKey: false
 })
 
 postSchema.static('all', async function(){
-    this.deleteMany({
-
-    })
-
     return await this.find()
 });
 

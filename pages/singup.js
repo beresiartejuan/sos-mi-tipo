@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Singup from '../components/Singup/Singup';
+import Main from '../atoms/Main/Main';
 import { withSessionSsr } from '../libs/withSession';
 import { useEffect } from 'react';
 
-export default function Home({ errors }) {
+export default function SingupPage({ errors }) {
 
     useEffect(() => {
         if(!errors) return
@@ -21,9 +22,7 @@ export default function Home({ errors }) {
                 <link rel="icon" href="/fav.png" />
             </Head>
 
-            <main className={styles.main}>
-                <Singup></Singup>
-            </main>
+            <Main><Singup></Singup></Main>
         </div>
     )
 }

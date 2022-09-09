@@ -1,0 +1,65 @@
+.PostForm{
+    min-width: 25vw;
+    padding: 2px;
+}
+
+.PostForm [name="group"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    min-width: 320px;
+}
+
+.PostForm [name="group"] input {
+    margin-top: 0;
+}
+
+.PostForm [name="image-group"] {
+    display: inline-block;
+    width: 9%;
+}
+
+.PostForm [name="field-group"] {
+    display: inline-block;
+    width: 90%;
+}
+
+.PostForm [name="button-group"]{
+    width: 85%;
+    display: inline-block;
+}
+
+.PostForm [name="blood-group"]{
+    width: 13%;
+    margin-right: 2%;
+    display: inline-block;
+}
+
+.PostForm [name="blood-group"] select {
+    width: 100%;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-style: hidden;
+}
+
+@media (max-width: 1450px) {
+    .PostForm [name="image-group"]{
+        width: 15%;
+    }
+
+    .PostForm [name="field-group"]{
+        width: 85%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .PostForm [name="image-group"]{
+        width: 14%;
+        padding-right: 1%;
+    }
+
+    .PostForm [name="field-group"]{
+        width: 85%;
+    }
+}

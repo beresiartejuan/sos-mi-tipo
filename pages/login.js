@@ -2,9 +2,10 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { withSessionSsr } from '../libs/withSession';
 import Login from '../components/Login/Login';
+import Main from '../atoms/Main/Main';
 import { useEffect } from 'react';
 
-export default function Home({ errors }) {
+export default function LoginPage({ errors }) {
 
     useEffect(() => {
         if(!errors) return
@@ -17,13 +18,11 @@ export default function Home({ errors }) {
     return (
         <div className={styles.container}>
             <Head>
-                <title>SingUp | Sos Mi Tipo</title>
+                <title>Login | Sos Mi Tipo</title>
                 <link rel="icon" href="/fav.png" />
             </Head>
 
-            <main className={styles.main}>
-                <Login></Login>
-            </main>
+            <Main><Login></Login></Main>
         </div>
     )
 }
