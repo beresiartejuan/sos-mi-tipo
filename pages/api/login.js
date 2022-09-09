@@ -22,7 +22,7 @@ async function loginHandler(req, res){
     
     console.log("---- DATABASE CONNECT ---------")
 
-    connectDatabase();
+    await connectDatabase();
 
     const user = await User.findByEmail(email)
     
