@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 
-export default function connectDatabase(){
+export default async function connectDatabase(){
 
-    mongoose.connect(process.env.MONGO_URI).then((db) =>{
-        console.log(`${db.connection.name} already connect like database!`)
-    })
+    await mongoose.connect(process.env.MONGO_URI)
 
 }
