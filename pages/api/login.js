@@ -11,28 +11,24 @@ async function loginHandler(req, res){
         errors.push({ field: 'email' })
         req.session.errors = JSON.stringify(errors)
         await req.session.save()
-        res.redirect(308, '/login')
+        return res.redirect(308, '/login')
     }
     if(!password){
         errors.push({ field: 'password' })
         req.session.errors = JSON.stringify(errors)
         await req.session.save()
-        res.redirect(308, '/login')
+        return res.redirect(308, '/login')
     }
-    
-    console.log("---- DATABASE CONNECT ---------")
 
-    await connectDatabase();
+    connectDatabase();
 
     const user = await User.findByEmail(email)
-    
-    console.log(user)
 
     if(!user){
         errors.push({ field: 'email', message: 'Email not register' })
         req.session.errors = JSON.stringify(errors)
         await req.session.save()
-        res.redirect(308, '/login')
+        return res.redirect(308, '/login')
     }
 
     if(await user.isMyPassword(password)){
@@ -48,10 +44,10 @@ async function loginHandler(req, res){
     if(errors.length > 0){
         req.session.errors = JSON.stringify(errors)
         await req.session.save()
-        res.redirect(308, '/login')
+        return res.redirect(308, '/login')
     }else{
         await req.session.save()
-        res.redirect(308, '/home')
+        return res.redirect(308, '/home')
     }
 
 }
