@@ -20,7 +20,7 @@ async function loginHandler(req, res){
         return res.redirect(308, '/login')
     }
 
-    await connectDatabase();
+    connectDatabase();
 
     const user = await User.findByEmail(email)
 
