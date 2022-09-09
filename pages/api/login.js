@@ -19,10 +19,14 @@ async function loginHandler(req, res){
         await req.session.save()
         return res.redirect(308, '/login')
     }
+    
+    console.log("---- DATABASE CONNECT ---------")
 
     connectDatabase();
 
     const user = await User.findByEmail(email)
+    
+    console.log(user)
 
     if(!user){
         errors.push({ field: 'email', message: 'Email not register' })
